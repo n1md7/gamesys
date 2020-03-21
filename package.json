@@ -1,0 +1,11 @@
+{
+  "name": "gamesys",
+  "version": "1.0.0",
+  "description": "Gamesys test task",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Bitchiko(harry)",
+  "license": "MIT"
+}
