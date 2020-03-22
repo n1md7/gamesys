@@ -21,12 +21,12 @@ var modal = ( function ( Modal, global ) {
       'afterbegin',
       '' +
       '<div id="' + id + '" class="modal">' +
-      '<div class="modal-header"></div>' +
-      '<div class="modal-body"></div>' +
-      '<div class="modal-footer">' +
-      '<button class="close">Cancel</button>' +
-      '<button class="confirm">Confirm</button>' +
-      '</div>' +
+      '  <div class="modal-header"></div>' +
+      '  <div class="modal-body"></div>' +
+      '  <div class="modal-footer">' +
+      '    <button class="close btn btn-primary">Cancel</button>' +
+      '    <button class="confirm btn btn-success">Confirm</button>' +
+      '  </div>' +
       '</div>' );
 
     return document.getElementById( id );
@@ -42,27 +42,27 @@ var modal = ( function ( Modal, global ) {
     confirm: function ( callback ) {
       callbacks[ 'confirm' ].push( callback );
       return this;
-    },
+    }.bind( this ),
     hide: function ( callback ) {
       callbacks[ 'hide' ].push( callback );
       return this;
-    },
+    }.bind( this ),
     show: function ( callback ) {
       callbacks[ 'show' ].push( callback );
       return this;
-    },
+    }.bind( this ),
   };
 
 
-  this.show = function (instantCallback) {
+  this.show = function ( instantCallback ) {
     this.hide();
     modal = createModal();
     // set header/body text
     modal
-     .querySelector('div.modal-header')
+     .querySelector( 'div.modal-header' )
      .innerText = modalHeader;
     modal
-     .querySelector('div.modal-body')
+     .querySelector( 'div.modal-body' )
      .innerText = modalBody;
     // bind event listeners
     modal
@@ -72,10 +72,10 @@ var modal = ( function ( Modal, global ) {
      .querySelector( 'button.confirm' )
      .addEventListener( 'click', this.confirm.bind( this ) );
 
-    if(typeof instantCallback === 'function') instantCallback.call(modal);
+    if ( typeof instantCallback === 'function' ) instantCallback.call( modal );
     if ( callbacks.hasOwnProperty( 'show' ) ) {
       callbacks.show.forEach( function ( fn ) {
-        if ( typeof fn === 'function' ) fn.call(modal);
+        if ( typeof fn === 'function' ) fn.call( modal );
       } );
     }
 

@@ -14,14 +14,13 @@ module.exports = {
           const req = http.request( coronaOptions, res => {
             const chunks = [];
             res.on( 'data', chunk => chunks.push( chunk ) );
-            res.on( 'end', () => resolve( Buffer.concat( chunks ).toString() ) );
+            res.on( 'end', () => resolve( Buffer.concat( chunks ) ) );
           } );
           req.end();
         } );
       } ).then( result => {
-        response.writeHead( 200, { 'Content-Type': 'Application/json' } );
-        response.write( result );
-        response.end();
+        response.writeHead( 200, { 'Content-Type': 'application/json' } );
+        response.end( result );
       } ).catch( error => {
         response.writeHead( 500 );
         response.end();

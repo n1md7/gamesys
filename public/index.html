@@ -5,6 +5,7 @@
   <title>GameSys</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/flex.css"/>
   <link rel="stylesheet" href="/css/index.css"/>
   <script src="/js/ajax.js"></script>
   <script src="/js/selectors.js"></script>
@@ -14,9 +15,50 @@
 </head>
 <body>
 <div class="container">
-<div id="stats">
-  loading...
-</div>
+  <div class="dashboard">
+    <div class="row no-gutters">
+      <div class="col col-auto">
+        <h1>Global Coronavirus Cases:</h1>
+        <h1 class="total-cases">loading...</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-auto">
+        <h1>Deaths:</h1>
+        <h1 class="death-cases">loading...</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-auto">
+        <h1>Recovered:</h1>
+        <h1 class="recovered-cases">loading...</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-auto">
+        <p>Last checked:</p>
+        <p class="last-checked-time">loading...</p>
+      </div>
+    </div>
+  </div>
+  <div id="actions">
+    <div class="row justify-center">
+      <div class="col col-auto">
+        <label for="show-max">Show max:</label>
+        <select id="show-max" disabled>
+          <option value="1">1</option>
+          <option value="3">3</option>
+          <option value="9">9</option>
+          <option value="100">100</option>
+          <option value="196">196</option>
+          <option value="1000" selected>all</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div id="stats">
+    <p>loading...</p>
+  </div>
 </div>
 </body>
 </html>

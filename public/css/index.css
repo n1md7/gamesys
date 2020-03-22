@@ -1,0 +1,55 @@
+.dashboard .col h1,
+.dashboard .col p{
+    text-align: center;
+}
+
+.dashboard .row {
+    margin: 0;
+}
+
+h1.total-cases,
+h1.death-cases,
+h1.recovered-cases {
+    font-family: fantasy;
+}
+
+.card ul li > b {
+    letter-spacing: 2px;
+}
+
+h1.total-cases,
+.card ul li:first-child > b {
+    color: rgba(170, 170, 170, 0.91);
+}
+
+h1.death-cases,
+.card ul li:nth-child(2) > b {
+    color: rgba(188, 7, 0, 0.66);
+}
+
+h1.recovered-cases,
+.card ul li:last-child > b {
+    color: rgba(138, 202, 43, 0.9);
+}
+
+.card ul li {
+    font-family: sans-serif;
+}
+
+.card ul li b {
+    font-family: fantasy;
+}
+
+body {
+    background: #000000d4;
+    color: powderblue;
+}
+
+#stats > p:first-child {
+    text-align: center;
+}
+
+#actions{
+    font-family: monospace;
+}
+
