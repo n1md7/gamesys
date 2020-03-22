@@ -12,6 +12,6 @@ module.exports = {
   port: 8080,
   hostname: '127.0.0.1',
   // seconds
-  fileCacheTTL: 30,
-  dataCacheTTL: 15,
+  fileCacheTTL: 120,
+  dataCacheTTL: 120,
 };
