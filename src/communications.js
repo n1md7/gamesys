@@ -1,14 +1,15 @@
 const fs = require( 'fs' );
 const path = require( 'path' );
+const { fileCacheTTL } = require( '../config' );
 const Cache = require( './cache' );
-const localCache = new Cache( 30 );
+const fileCache = new Cache( fileCacheTTL );
 const { sha1 } = require( './encrypt' );
 const log = require( './logger' );
 
 function sendResponse( url, contentType, response ) {
   const view = `${ __dirname }/../public/`;
   const file = path.join( view, url );
-  localCache.send( sha1( file ), function () {
+  fileCache.send( sha1( file ), function () {
     return new Promise( ( resolve, reject ) => {
       fs.readFile( file, ( error, content ) => {
         if ( error ) {
