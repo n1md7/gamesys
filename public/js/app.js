@@ -32,7 +32,7 @@ function App( root ) {
   var renderCallbacks = [];
   this.onRender = function ( callback ) {
     if ( typeof callback === 'function' ) {
-      renderCallbacks.push(callback);
+      renderCallbacks.push( callback );
     }
   };
 
@@ -51,7 +51,7 @@ function App( root ) {
           row.classList.add( 'no-gutters' );
         }
         var country = stat.country;
-        if ( stat.province ) {
+        if ( stat.province && country !== stat.province ) {
           country += ' - ' + stat.province;
         }
         col.insertAdjacentHTML(
