@@ -21,7 +21,9 @@ var modal = ( function ( Modal, global ) {
       'afterbegin',
       '' +
       '<div id="' + id + '" class="modal">' +
-      '  <div class="modal-header"></div>' +
+      '  <div class="modal-header">' +
+      '   <span></span><b class="close">&#10006;</b>' +
+      '  </div>' +
       '  <div class="modal-body"></div>' +
       '  <div class="modal-footer">' +
       '    <button class="close btn btn-primary">Cancel</button>' +
@@ -65,7 +67,7 @@ var modal = ( function ( Modal, global ) {
     modal = createModal();
     // set header/body text
     modal
-     .querySelector( 'div.modal-header' )
+     .querySelector( 'div.modal-header>span' )
      .innerText = modalHeader;
     if ( config.allowHTML ) {
       modal
@@ -79,6 +81,9 @@ var modal = ( function ( Modal, global ) {
     // bind event listeners
     modal
      .querySelector( 'button.close' )
+     .addEventListener( 'click', this.cancel.bind( this ) );
+    modal
+     .querySelector( 'b.close' )
      .addEventListener( 'click', this.cancel.bind( this ) );
     modal
      .querySelector( 'button.confirm' )

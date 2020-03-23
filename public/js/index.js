@@ -32,7 +32,7 @@
   function readMoreHandler( e ) {
     this.innerText = 'loading...';
     this.disable();
-    ajax.load( '/api/v1.0/lorem/?p=30' )
+    ajax.load( '/api/v1.0/lorem/?p=3' )
      .then( function ( result ) {
        e.target.innerText = 'Read more';
        e.target.enable();
