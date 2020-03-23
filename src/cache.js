@@ -1,3 +1,5 @@
+const { verboseCaching } = require( '../config' );
+
 function Cache( timeToLiveSeconds = 120 ) {
   // convert to milliseconds
   this.ttl = +timeToLiveSeconds * 1000;
@@ -11,7 +13,7 @@ Cache.prototype.send = function ( key, storeFunction ) {
     const requestTime = 1 * new Date();
     if ( requestTime > ttl + time ) {
       // expired
-      console.log( 'Cache expired', {
+      !verboseCaching || console.log( 'Cache expired', {
         requestTime,
         cacheTime: time,
       } );
@@ -29,14 +31,14 @@ Cache.prototype.send = function ( key, storeFunction ) {
 
 Cache.prototype.get = function ( key ) {
   if ( this.cache.hasOwnProperty( key ) ) {
-    console.log( 'Cache taken from memory' );
+    !verboseCaching || console.log( 'Cache taken from memory' );
     return Promise.resolve( this.cache[ key ] );
   }
 };
 
 Cache.prototype.set = function ( key, storeFunction ) {
   if ( typeof storeFunction === 'function' ) {
-    console.log('Cache has been set');
+    !verboseCaching || console.log( 'Cache has been set' );
     return storeFunction()
      .then( result => this.cache[ key ] = {
        time: 1 * new Date(),

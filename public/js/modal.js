@@ -29,6 +29,12 @@ var modal = ( function ( Modal, global ) {
       '  </div>' +
       '</div>' );
 
+    if ( !'.modal-cover'.find() ) {
+      var modalCover = document.createElement( 'div' );
+      modalCover.setAttribute( 'class', 'modal-cover hidden' );
+      document.body.appendChild( modalCover );
+    }
+
     return document.getElementById( id );
   }
 
@@ -61,9 +67,15 @@ var modal = ( function ( Modal, global ) {
     modal
      .querySelector( 'div.modal-header' )
      .innerText = modalHeader;
-    modal
-     .querySelector( 'div.modal-body' )
-     .innerText = modalBody;
+    if ( config.allowHTML ) {
+      modal
+       .querySelector( 'div.modal-body' )
+       .innerHTML = modalBody;
+    } else {
+      modal
+       .querySelector( 'div.modal-body' )
+       .innerText = modalBody;
+    }
     // bind event listeners
     modal
      .querySelector( 'button.close' )
@@ -78,6 +90,8 @@ var modal = ( function ( Modal, global ) {
         if ( typeof fn === 'function' ) fn.call( modal );
       } );
     }
+
+    'div.modal-cover'.find().show();
 
     return this;
   };
@@ -97,6 +111,7 @@ var modal = ( function ( Modal, global ) {
           if ( typeof fn === 'function' ) fn();
         } );
       }
+      'div.modal-cover'.find().hide();
     }
 
     return this;
@@ -116,6 +131,7 @@ var modal = ( function ( Modal, global ) {
         if ( typeof fn === 'function' ) fn();
       } );
     }
+    'div.modal-cover'.find().hide();
   };
 
   this.cancel = function () {

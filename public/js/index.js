@@ -1,6 +1,4 @@
-( function ( app ) {
-  var defaultModal = null;
-
+( function ( app, defaultModal ) {
   app.load( function ( root, result ) {
     console.log( 'stats have been loaded!' );
     // update dashboard stats
@@ -21,7 +19,7 @@
        } );
      }.bind( this ) );
     // enable limit button
-    '#show-max'.find().removeAttribute('disabled');
+    '#show-max'.find().removeAttribute( 'disabled' );
     this.onRender( function () {
       'button.btn'.findAll()
        .forEach( function ( btn ) {
@@ -32,25 +30,35 @@
   } );
 
   function readMoreHandler( e ) {
-    console.log('clickdas')
-    if ( defaultModal ) {
-      defaultModal.hide();
-    }
-    defaultModal = modal( {
-      text: e.target.parentNode.querySelector( 'h3' ).innerText,
-      title: ' my modal is here',
-    } ).show( function () {
-      console.log( this, 'first modal shown' );
-    } );
-    defaultModal.on.confirm( function () {
-      defaultModal = null;
-      console.log( 'confirmed' );
-    } );
-    defaultModal.on.hide( function () {
-      defaultModal = null;
-      console.log( 'canceled/hide' );
-    } );
+    this.innerText = 'loading...';
+    this.disable();
+    ajax.load( '/api/v1.0/lorem/?p=30' )
+     .then( function ( result ) {
+       e.target.innerText = 'Read more';
+       e.target.enable();
+       return result;
+     } )
+     .then( function ( result ) {
+       if ( defaultModal ) {
+         defaultModal.hide();
+       }
+       defaultModal = modal( {
+         title: e.target.parentNode.querySelector( 'h3' ).innerText,
+         text: result,
+         allowHTML: true,
+       } ).show( function () {
+         'body'.find().overflowHidden();
+         console.log( this, 'My modal is visible' );
+       } ).on.confirm( function () {
+         'body'.find().overflowAuto();
+         defaultModal = null;
+         console.log( 'Confirmed' );
+       } ).on.hide( function () {
+         'body'.find().overflowAuto();
+         defaultModal = null;
+         console.log( 'Canceled/hide' );
+       } );
+     } );
   }
-
-} )( new App( '#stats' ) );
+} )( new App( '#stats' ), null );
 
