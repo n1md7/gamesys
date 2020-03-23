@@ -47,13 +47,15 @@
          text: result,
          allowHTML: true,
        } ).show( function () {
+         // disable scrolling when modal is shown
          'body'.find().overflowHidden();
-         console.log( this, 'My modal is visible' );
        } ).on.confirm( function () {
+         // enable scrolling when modal is hidden
          'body'.find().overflowAuto();
          defaultModal = null;
          console.log( 'Confirmed' );
        } ).on.hide( function () {
+         // enable scrolling when modal is hidden
          'body'.find().overflowAuto();
          defaultModal = null;
          console.log( 'Canceled/hide' );

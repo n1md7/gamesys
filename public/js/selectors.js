@@ -1,6 +1,6 @@
 String.prototype.find = function ( selector ) {
   var parent = document.querySelector( this );
-
+  if ( !parent ) return null;
   if ( selector ) {
     return parent.querySelector( selector );
   }
@@ -10,7 +10,7 @@ String.prototype.find = function ( selector ) {
 
 String.prototype.findAll = function ( selectors ) {
   var parents = Array.from( document.querySelectorAll( this ) );
-
+  if ( !parent ) return null;
   if ( selectors ) {
     return parents.map( function ( parent ) {
       return Array.from( parent.querySelectorAll( selectors ) );
@@ -42,4 +42,14 @@ Element.prototype.disable = function () {
 
 Element.prototype.enable = function () {
   this.removeAttribute( 'disabled' );
+};
+
+Element.prototype.find = function ( selector ) {
+  var parent = this;
+  if ( !parent ) return null;
+  if ( selector ) {
+    return parent.querySelector( selector );
+  }
+
+  return parent;
 };

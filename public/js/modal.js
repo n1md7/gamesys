@@ -67,26 +67,26 @@ var modal = ( function ( Modal, global ) {
     modal = createModal();
     // set header/body text
     modal
-     .querySelector( 'div.modal-header>span' )
+     .find( 'div.modal-header>span' )
      .innerText = modalHeader;
     if ( config.allowHTML ) {
       modal
-       .querySelector( 'div.modal-body' )
+       .find( 'div.modal-body' )
        .innerHTML = modalBody;
     } else {
       modal
-       .querySelector( 'div.modal-body' )
+       .find( 'div.modal-body' )
        .innerText = modalBody;
     }
     // bind event listeners
     modal
-     .querySelector( 'button.close' )
+     .find( 'button.close' )
      .addEventListener( 'click', this.cancel.bind( this ) );
     modal
-     .querySelector( 'b.close' )
+     .find( 'b.close' )
      .addEventListener( 'click', this.cancel.bind( this ) );
     modal
-     .querySelector( 'button.confirm' )
+     .find( 'button.confirm' )
      .addEventListener( 'click', this.confirm.bind( this ) );
 
     if ( typeof instantCallback === 'function' ) instantCallback.call( modal );
@@ -104,10 +104,10 @@ var modal = ( function ( Modal, global ) {
   this.hide = function () {
     if ( modal ) {
       modal
-       .querySelector( 'button.close' )
+       .find( 'button.close' )
        .removeEventListener( 'click', this.hide );
       modal
-       .querySelector( 'button.confirm' )
+       .find( 'button.confirm' )
        .removeEventListener( 'click', this.confirm );
       modal.parentNode.removeChild( modal );
       // exec callbacks
@@ -124,10 +124,10 @@ var modal = ( function ( Modal, global ) {
 
   this.confirm = function () {
     modal
-     .querySelector( 'button.close' )
+     .find( 'button.close' )
      .removeEventListener( 'click', this.hide );
     modal
-     .querySelector( 'button.confirm' )
+     .find( 'button.confirm' )
      .removeEventListener( 'click', this.confirm );
     modal.parentNode.removeChild( modal );
 
