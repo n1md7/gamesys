@@ -1,6 +1,6 @@
-( function ( app, defaultModal ) {
+( function ( app, defaultModal, toggleModal ) {
   app.load( function ( root, result ) {
-    console.log( 'stats have been loaded!' );
+    console.info( 'Data have been loaded!' );
     // update dashboard stats
     'p.last-checked-time'.find().innerText = new Date( this.state.allData.lastChecked );
     var calculatedValues = result.reduce( function ( acc, current ) {
@@ -47,20 +47,27 @@
          text: result,
          allowHTML: true,
        } ).show( function () {
-         // disable scrolling when modal is shown
-         'body'.find().overflowHidden();
+         // callback if necessary
        } ).on.confirm( function () {
-         // enable scrolling when modal is hidden
-         'body'.find().overflowAuto();
          defaultModal = null;
-         console.log( 'Confirmed' );
+         // now start toggling of small/long content modal
+         ( function toggle( type ) {
+           ajax.load( '/api/v1.0/lorem/?p=' + ( type === 'small' ? 1 : 12 ) )
+            .then( function ( text ) {
+              toggleModal = modal( {
+                title: type + ' text',
+                text: text,
+                allowHTML: true,
+              } ).show().on.confirm( function () {
+                toggleModal = null;
+                toggle( type === 'small' ? 'long' : 'small' );
+              } );
+            } );
+         } )( 'small' );
        } ).on.hide( function () {
-         // enable scrolling when modal is hidden
-         'body'.find().overflowAuto();
          defaultModal = null;
-         console.log( 'Canceled/hide' );
        } );
      } );
   }
-} )( new App( '#stats' ), null );
+} )( new App( '#stats' ), null, null );
 

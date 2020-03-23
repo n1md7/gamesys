@@ -8,9 +8,13 @@ var modal = ( function ( Modal, global ) {
   var modal = null;
   var modalHeader = 'My title';
   var modalBody = config;
+  var backgroundScroll = false;
   if ( typeof config === 'object' ) {
     modalBody = config.text;
     modalHeader = config.title;
+    if(config.hasOwnProperty('backgroundScroll')){
+      backgroundScroll = config.backgroundScroll;
+    }
   }
 
   function createModal() {
@@ -97,7 +101,7 @@ var modal = ( function ( Modal, global ) {
     }
 
     'div.modal-cover'.find().show();
-
+    backgroundScroll || 'body'.find().overflowHidden();
     return this;
   };
 
@@ -118,6 +122,8 @@ var modal = ( function ( Modal, global ) {
       }
       'div.modal-cover'.find().hide();
     }
+    // enable scrolling back to normal modal is hidden
+    backgroundScroll || 'body'.find().overflowAuto();
 
     return this;
   };
