@@ -44,7 +44,7 @@
        }
        defaultModal = modal( {
          title: e.target.parentNode.querySelector( 'h3' ).innerText,
-         text: result,
+         text: 'Click <b>Confirm</b> to toggle Modal!' + result,
          allowHTML: true,
        } ).show( function () {
          // callback if necessary
@@ -56,7 +56,7 @@
             .then( function ( text ) {
               toggleModal = modal( {
                 title: type + ' text',
-                text: text,
+                text: 'Do you want to see ' + ( ( type === 'small' ? 'long' : 'small' ) ) + ' text?' + text,
                 allowHTML: true,
               } ).show().on.confirm( function () {
                 toggleModal = null;
